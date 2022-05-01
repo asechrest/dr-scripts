@@ -7,6 +7,14 @@ custom_require.call(%w[common common-items drinfomon])
 class Almanac
 
   def initialize
+    arg_definitions = [
+      [
+        { name: 'script_summary', optional: true, description: 'Uses an almanac every 10 minutes. Pauses all other scripts, stows your left hand, studies it, then unpauses everything.'}
+      ]
+    ]
+
+    args = parse_args(arg_definitions)
+
     settings = get_settings
     UserVars.almanac_last_use ||= Time.now - 600
     @no_use_scripts = settings.almanac_no_use_scripts
